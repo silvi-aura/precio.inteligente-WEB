@@ -1,1254 +1,679 @@
-
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Precio Inteligente | Dejá de vender a ojo</title>
-  <meta name="description" content="Conocé cuánto te cuesta fabricar tus productos, cuánto gastás para venderlos y cuánto dinero te queda. Guía práctica y calculadora para emprendedores.">
-  <meta name="theme-color" content="#101d38">
-  <meta property="og:title" content="Precio Inteligente | Dejá de vender a ojo">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b3b">
+  <title>Precio Inteligente | Guía práctica + app calculadora</title>
+  <meta name="description" content="Dejá de poner precios a ojo. Conocé cuánto te cuesta producir, cuánto gastás para vender y cuánto te queda por unidad. Guía práctica + app calculadora.">
+  <meta property="og:title" content="Precio Inteligente | Conocé tus costos y tus precios">
   <meta property="og:description" content="Guía práctica de 24 páginas + aplicación calculadora para emprendedores.">
   <meta property="og:image" content="precio_inteligente_assets/portada-precio-inteligente.webp">
-
+  <meta name="robots" content="index, follow">
   <style>
     :root {
-      --navy: #101d38;
-      --navy2: #192c50;
-      --blue: #2376d2;
-      --cyan: #dff3ff;
-      --yellow: #ffd447;
-      --white: #ffffff;
-      --light: #f4f7fc;
-      --text: #26344c;
-      --muted: #65738a;
-      --green: #16865b;
-      --border: #e3e9f2;
-      --shadow: 0 18px 45px rgba(16,29,56,.10);
+      --navy: #071b3b;
+      --navy-2: #102b55;
+      --blue: #1474c8;
+      --cyan: #e7f6ff;
+      --yellow: #ffd43b;
+      --yellow-2: #ffbd18;
+      --ink: #14233d;
+      --muted: #64748b;
+      --white: #fff;
+      --paper: #f5f8fc;
+      --line: #dce5f0;
+      --shadow: 0 18px 50px rgba(7,27,59,.13);
+      --radius: 22px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      line-height: 1.65;
+      color: var(--ink);
       background: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
     }
-
-    a { text-decoration: none; }
-
-    .container {
-      width: min(1120px, 91%);
-      margin: auto;
-    }
-
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 44px)); margin-inline: auto; }
     .section { padding: 82px 0; }
-
-    .section-light { background: var(--light); }
-
+    .section-soft { background: var(--paper); }
+    .section-blue { background: var(--navy); color: var(--white); }
     .eyebrow {
-      display: inline-block;
-      color: var(--blue);
-      background: #eaf4ff;
-      border-radius: 30px;
-      padding: 7px 15px;
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: 1px;
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 14px; border-radius: 999px;
+      color: #07569e; background: #e4f3ff;
+      font-size: .76rem; font-weight: 850; letter-spacing: .09em;
       text-transform: uppercase;
-      margin-bottom: 18px;
     }
-
-    h1, h2, h3 {
-      line-height: 1.15;
-      margin-top: 0;
+    .eyebrow::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: currentColor;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.1; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.45rem, 5.5vw, 4.8rem); margin: 20px 0; }
+    h1 .highlight {
+      display: inline;
       color: var(--navy);
+      background: var(--yellow);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0 .12em;
+      border-radius: 7px;
     }
-
-    h1 {
-      font-size: clamp(2.4rem, 5.2vw, 4.4rem);
-      letter-spacing: -2px;
-      margin-bottom: 22px;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -1px;
-      margin-bottom: 18px;
-    }
-
-    h3 { font-size: 1.25rem; }
-
-    p { margin-top: 0; }
-
-    .lead {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 690px;
-    }
-
-    .center { text-align: center; }
-
-    .center .lead {
-      margin-left: auto;
-      margin-right: auto;
-    }
+    h2 { font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 17px; }
+    h3 { font-size: 1.2rem; margin-bottom: 9px; }
+    .section-heading { max-width: 790px; margin: 0 auto 38px; text-align: center; }
+    .section-heading .eyebrow { margin-bottom: 17px; }
+    .section-heading p { color: var(--muted); font-size: 1.08rem; margin-bottom: 0; }
+    .section-blue .section-heading p { color: #c6d5e9; }
 
     .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 9px;
-      padding: 17px 27px;
-      background: var(--yellow);
-      color: var(--navy);
-      border-radius: 9px;
-      font-weight: 900;
-      font-size: 1rem;
-      box-shadow: 0 8px 20px rgba(255,212,71,.22);
-      transition: transform .2s, box-shadow .2s;
-      text-align: center;
+      display: inline-flex; align-items: center; justify-content: center; gap: 11px;
+      min-height: 56px; padding: 15px 25px;
+      border: 0; border-radius: 999px;
+      background: linear-gradient(180deg, #ffe66c 0%, var(--yellow) 58%, #ffc21a 100%);
+      color: #071b3b; font-size: .98rem; font-weight: 950;
+      letter-spacing: .01em; text-align: center;
+      box-shadow: 0 7px 0 #d99b00, 0 13px 25px rgba(255,196,25,.22);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 9px 0 #d99b00, 0 17px 28px rgba(255,196,25,.3); }
+    .btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #1474c8; outline-offset: 4px; }
+    .btn-arrow { font-size: 1.3em; line-height: .7; }
+    .btn-wide { width: 100%; }
+    .muted { color: var(--muted); }
+    .check-list { list-style: none; margin: 0; padding: 0; }
+    .check-list li { position: relative; padding: 8px 0 8px 30px; }
+    .check-list li::before {
+      content: "✓"; position: absolute; left: 0; top: 8px;
+      width: 21px; height: 21px; display: grid; place-items: center;
+      border-radius: 50%; color: var(--navy); background: var(--yellow);
+      font-size: .85rem; font-weight: 950;
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(255,212,71,.35);
+    /* Header */
+    .site-header {
+      position: relative; z-index: 10; background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,.12); color: #fff;
     }
-
-    .btn-blue {
-      background: var(--blue);
-      color: white;
-      box-shadow: none;
-    }
-
-    .btn-small {
-      padding: 12px 19px;
-      font-size: .9rem;
-    }
-
-
-    .hero-product-image {
-      display: block;
-      width: min(100%, 390px);
-      max-height: 560px;
-      object-fit: contain;
-      margin: 0 auto;
-      border-radius: 16px;
-      box-shadow: 0 22px 55px rgba(0,0,0,.28);
-      background: #fff;
-    }
-
-    .product-image {
-      display: block;
-      width: 100%;
-      max-height: 440px;
-      object-fit: contain;
-      border-radius: 12px;
-      margin: 0 auto 22px;
-      background: #f8faff;
-    }
-
-    .app-screenshot {
-      display: block;
-      width: min(100%, 390px);
-      max-height: 760px;
-      object-fit: contain;
-      object-position: top center;
-      margin: 0 auto;
-      border-radius: 18px;
-      box-shadow: 0 20px 45px rgba(0,0,0,.22);
-      background: #fff;
-    }
-
-    .visual-caption {
-      color: var(--muted);
-      font-size: .82rem;
-      text-align: center;
-      margin: 10px 0 0;
-    }
-
-    .app-section .visual-caption { color: #d0dced; }
-
-    /* NAVEGACIÓN */
-
-    header {
-      background: var(--navy);
-      color: white;
-      padding: 15px 0;
-    }
-
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+      min-height: 76px; display: flex; justify-content: space-between;
+      align-items: center; gap: 20px;
     }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 950; letter-spacing: -.025em; line-height: 1; }
+    .brand-mark { width: 37px; height: 34px; display: inline-flex; align-items: end; gap: 3px; position: relative; }
+    .brand-mark i { display: block; width: 8px; border-radius: 2px 2px 0 0; background: #fff; }
+    .brand-mark i:nth-child(1) { height: 11px; }
+    .brand-mark i:nth-child(2) { height: 19px; }
+    .brand-mark i:nth-child(3) { height: 28px; background: var(--yellow); }
+    .brand-name { font-size: 1.05rem; }
+    .brand-name span { color: var(--yellow); }
+    .nav .btn { min-height: 43px; padding: 10px 19px; font-size: .8rem; box-shadow: none; }
 
-    .brand {
-      color: white;
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: .5px;
-    }
-
-    .brand span { color: var(--yellow); }
-
-    /* HERO */
-
+    /* Hero */
     .hero {
-      background:
-        radial-gradient(circle at 80% 20%, #294c7d 0, transparent 35%),
-        linear-gradient(135deg, var(--navy), #162d52);
-      color: white;
-      padding: 85px 0 95px;
-      overflow: hidden;
+      position: relative; overflow: hidden; padding: 70px 0 82px;
+      color: #fff; background:
+        radial-gradient(ellipse at 78% 21%, rgba(46,102,164,.55), transparent 34%),
+        radial-gradient(ellipse at 10% 100%, rgba(11,68,121,.42), transparent 42%),
+        linear-gradient(125deg, #06152f 0%, #0b2850 58%, #102e58 100%);
     }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: center;
-      gap: 55px;
+    .hero::after {
+      content: ""; position: absolute; inset: auto 0 0; height: 10px;
+      background: linear-gradient(90deg, transparent, rgba(255,212,59,.8), transparent);
+      opacity: .8;
     }
-
-    .hero h1 { color: white; }
-
-    .hero h1 span { color: var(--yellow); }
-
-    .hero .lead { color: #d8e4f5; }
-
-    .hero .eyebrow {
-      color: var(--yellow);
-      background: rgba(255,255,255,.10);
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 55px; position: relative; z-index: 1; }
+    .hero .eyebrow { color: var(--yellow); background: rgba(255,255,255,.1); }
+    .hero h1 { color: #fff; max-width: 680px; }
+    .hero .highlight { color: var(--navy); }
+    .hero-copy { color: #dce8f7; font-size: clamp(1.04rem, 1.6vw, 1.2rem); max-width: 630px; }
+    .hero-bullets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 27px 0 30px; }
+    .hero-bullet {
+      min-height: 68px; display: flex; align-items: center; gap: 10px;
+      padding: 12px; border: 1px solid rgba(255,255,255,.32);
+      border-radius: 14px; background: rgba(255,255,255,.07);
+      color: #fff; font-size: .83rem; font-weight: 800; line-height: 1.25;
     }
-
-    .hero-note {
-      margin-top: 20px;
-      font-size: .88rem;
-      color: #c5d3e7;
-    }
-
+    .hero-bullet svg { flex: 0 0 26px; color: var(--yellow); }
+    .hero-note { color: #c6d5e9; font-size: .88rem; margin: 22px 0 0; }
     .hero-visual {
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.16);
-      padding: 25px;
-      border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0,0,0,.22);
-      transform: rotate(1deg);
+      min-height: 510px; position: relative; display: flex;
+      align-items: center; justify-content: center;
     }
-
-    .guide-mockup {
-      background: white;
-      color: var(--navy);
-      border-radius: 13px;
-      padding: 25px 22px;
-      width: 72%;
-      min-height: 230px;
-      box-shadow: 0 12px 25px rgba(0,0,0,.16);
-      position: relative;
-      z-index: 2;
+    .hero-cover {
+      width: min(66%, 345px); max-height: 500px; object-fit: contain;
+      position: relative; z-index: 2; border-radius: 10px;
+      box-shadow: 0 25px 55px rgba(0,0,0,.4);
+      transform: rotate(-3deg);
     }
-
-    .guide-mockup .mini-label {
-      font-size: .68rem;
-      font-weight: 900;
-      color: var(--blue);
-      letter-spacing: 2px;
+    .hero-phone {
+      width: 36%; max-height: 470px; object-fit: contain;
+      position: absolute; z-index: 3; right: 0; bottom: 8px;
+      border: 7px solid #111827; border-radius: 28px;
+      box-shadow: 0 22px 48px rgba(0,0,0,.45);
+      background: #fff;
     }
-
-    .guide-mockup strong {
-      display: block;
-      font-size: 1.9rem;
-      line-height: 1.05;
-      margin: 18px 0;
+    .hero-stamp {
+      position: absolute; top: 26px; right: 0; z-index: 4;
+      padding: 11px 14px; border-radius: 12px;
+      color: var(--navy); background: var(--yellow);
+      font-size: .76rem; font-weight: 950; text-align: center;
+      box-shadow: 0 9px 24px rgba(0,0,0,.2); transform: rotate(5deg);
     }
-
-    .guide-mockup .stripe {
-      background: var(--yellow);
-      height: 9px;
-      width: 75%;
-      border-radius: 20px;
-    }
-
-    .phone {
-      width: 49%;
-      margin: -120px 0 0 auto;
-      background: #111827;
-      padding: 9px;
-      border-radius: 27px;
-      position: relative;
-      z-index: 3;
-      box-shadow: 0 15px 30px rgba(0,0,0,.3);
-    }
-
-    .phone-screen {
-      background: #f4f7fc;
-      border-radius: 19px;
-      padding: 17px 12px;
-      min-height: 245px;
-      color: var(--navy);
-    }
-
-    .phone-title {
-      font-weight: 900;
-      font-size: .85rem;
-      margin-bottom: 14px;
-    }
-
-    .phone-field {
-      background: white;
-      border: 1px solid #e1e8f1;
-      padding: 9px;
-      margin: 7px 0;
-      border-radius: 7px;
-      font-size: .65rem;
-    }
-
-    .phone-result {
-      background: #dff5eb;
-      color: #14764d;
-      padding: 12px 8px;
-      border-radius: 8px;
-      margin-top: 12px;
-      font-size: .7rem;
-      font-weight: 900;
-    }
-
     .hero-caption {
-      color: #dce8f9;
-      font-size: .82rem;
-      text-align: center;
-      margin: 22px 0 0;
-    }
-
-    /* PROBLEMA */
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-top: 38px;
-    }
-
-    .pain-item {
-      display: flex;
-      gap: 13px;
-      align-items: flex-start;
-      background: white;
-      padding: 19px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .pain-icon {
-      background: #fff0e9;
-      color: #c85b32;
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      font-weight: 900;
-    }
-
-    .pain-item p { margin: 0; }
-
-    .callout {
-      margin-top: 35px;
-      padding: 26px;
-      border-left: 5px solid var(--yellow);
-      background: #fff9e5;
-      border-radius: 8px;
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    /* TRANSFORMACIÓN */
-
-    .transformation {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 40px;
-    }
-
-    .transform-card {
-      border-radius: 18px;
-      padding: 30px;
-    }
-
-    .before {
-      background: #fff0ed;
-      border: 1px solid #f3d6cf;
-    }
-
-    .after {
-      background: #e8f7ef;
-      border: 1px solid #c8ead8;
-    }
-
-    .transform-card h3 { margin-bottom: 22px; }
-
-    .transform-card ul {
-      padding: 0;
-      list-style: none;
-      margin: 0;
-    }
-
-    .transform-card li {
-      margin: 13px 0;
-      padding-left: 25px;
-      position: relative;
-    }
-
-    .before li::before {
-      content: "×";
-      position: absolute;
-      left: 0;
-      color: #d25d48;
-      font-weight: 900;
-    }
-
-    .after li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--green);
-      font-weight: 900;
-    }
-
-    /* PRODUCTO */
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 40px;
-    }
-
-    .product-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 30px;
+      position: absolute; left: 0; bottom: -9px; z-index: 4;
+      padding: 10px 15px; background: #fff; color: var(--navy);
+      border-radius: 10px; font-size: .78rem; font-weight: 900;
       box-shadow: var(--shadow);
     }
 
-    .product-number {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      background: var(--yellow);
-      color: var(--navy);
-      border-radius: 12px;
-      font-weight: 900;
-      margin-bottom: 22px;
+    /* Pain */
+    .pain-wrap { display: grid; grid-template-columns: .82fr 1.18fr; gap: 44px; align-items: center; }
+    .pain-aside {
+      padding: 29px; border-radius: var(--radius);
+      color: #fff; background: linear-gradient(150deg, #102d59, #071b3b);
+      box-shadow: var(--shadow);
     }
+    .pain-aside .big-quote { font-size: clamp(1.55rem, 3vw, 2.3rem); font-weight: 900; line-height: 1.16; letter-spacing: -.04em; }
+    .pain-aside .big-quote span { color: var(--yellow); }
+    .pain-aside p:last-child { margin-bottom: 0; color: #d0deef; }
+    .pain-content h2 { margin-bottom: 24px; }
+    .pain-content .check-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 25px; }
+    .pain-content .check-list li { font-weight: 650; font-size: .96rem; }
 
-    .feature-list {
-      padding: 0;
-      list-style: none;
-      margin: 20px 0 0;
+    /* Rubros */
+    .rubros-panel {
+      padding: 34px; border: 1px solid #d5eaf7; border-radius: 28px;
+      background: linear-gradient(145deg, #f4fbff, #e4f5ff);
+      box-shadow: 0 15px 40px rgba(17,79,125,.09);
     }
-
-    .feature-list li {
-      padding: 9px 0 9px 25px;
-      position: relative;
+    .rubros-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 13px; }
+    .rubro-card {
+      overflow: hidden; background: #fff; border: 1px solid #dae8f1;
+      border-radius: 17px; box-shadow: 0 7px 18px rgba(7,27,59,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-
-    .feature-list li::before {
-      content: "✓";
-      color: var(--green);
-      font-weight: 900;
-      position: absolute;
-      left: 0;
+    .rubro-card:hover { transform: translateY(-5px); box-shadow: 0 14px 26px rgba(7,27,59,.14); }
+    .rubro-card img { width: 100%; aspect-ratio: 1.08 / 1; object-fit: cover; }
+    .rubro-card h3 {
+      min-height: 55px; display: flex; align-items: center; justify-content: center;
+      margin: 0; padding: 10px 8px; text-align: center;
+      color: var(--navy); font-size: .83rem; letter-spacing: -.01em;
     }
+    .rubros-note { text-align: center; color: #54708b; font-size: .9rem; margin: 22px 0 0; }
 
-    /* APP */
-
-    .app-section {
-      background: var(--navy);
-      color: white;
+    /* Tools */
+    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; align-items: center; }
+    .tool-card {
+      display: grid; grid-template-columns: 145px 1fr; gap: 22px;
+      align-items: center; min-height: 280px;
+      padding: 25px; border-radius: 22px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
     }
-
-    .app-section h2, .app-section h3 { color: white; }
-
-    .app-section .lead { color: #d0dced; }
-
-    .app-grid {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 55px;
-      align-items: center;
-      margin-top: 35px;
+    .tool-card img {
+      max-height: 245px; width: 100%; object-fit: contain;
+      border-radius: 9px; background: #fff;
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
     }
-
-    .app-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-      margin-top: 25px;
+    .tool-card.app-card { grid-template-columns: 125px 1fr; }
+    .tool-card.app-card img { max-height: 245px; max-width: 125px; justify-self: center; }
+    .tool-card h3 { color: #fff; margin-bottom: 5px; font-size: 1.25rem; }
+    .tool-subtitle { color: var(--yellow); font-weight: 850; font-size: .82rem; margin-bottom: 14px; text-transform: uppercase; }
+    .tool-card .check-list { color: #e6eef8; font-size: .9rem; }
+    .tool-card .check-list li { padding: 5px 0 5px 25px; }
+    .tool-card .check-list li::before { top: 6px; width: 17px; height: 17px; font-size: .72rem; }
+    .tools-plus {
+      display: grid; place-items: center; width: 58px; height: 58px;
+      margin: -8px auto; position: relative; z-index: 2;
+      border-radius: 50%; background: var(--yellow); color: var(--navy);
+      font-size: 2.1rem; font-weight: 900; border: 6px solid var(--navy);
     }
+    .tools-bottom { margin: 31px auto 0; max-width: 760px; text-align: center; color: #cad8eb; }
 
-    .app-feature {
-      padding: 16px;
-      border-radius: 10px;
-      background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.12);
-      font-size: .93rem;
+    /* Benefits */
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .benefit-card {
+      padding: 23px; border: 1px solid var(--line); border-radius: 17px;
+      background: #fff; box-shadow: 0 7px 20px rgba(7,27,59,.045);
     }
-
-    .app-demo {
-      background: white;
-      color: var(--navy);
-      border-radius: 18px;
-      padding: 27px;
-      box-shadow: 0 20px 45px rgba(0,0,0,.2);
+    .benefit-number {
+      display: grid; place-items: center; width: 38px; height: 38px;
+      margin-bottom: 17px; border-radius: 12px;
+      background: #e6f4ff; color: #0b5b9e; font-weight: 950;
     }
+    .benefit-card p { color: var(--muted); margin: 0; font-size: .93rem; }
 
-    .demo-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: .92rem;
-    }
-
-    .demo-line strong { color: var(--navy); }
-
-    .demo-total {
-      background: #e8f7ef;
-      color: var(--green);
-      border-radius: 10px;
-      padding: 17px;
-      margin-top: 17px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .disclaimer {
-      font-size: .8rem;
-      color: var(--muted);
-      margin-top: 13px;
-    }
-
-    /* PÚBLICO */
-
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 35px;
-    }
-
-    .audience-item {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 14px;
-      text-align: center;
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .audience-item span {
-      display: block;
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-    }
-
-    /* BENEFICIOS */
-
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-      margin-top: 38px;
-    }
-
-    .benefit {
-      background: white;
-      border: 1px solid var(--border);
-      padding: 23px;
-      border-radius: 13px;
-    }
-
-    .benefit h3 { font-size: 1.05rem; }
-
-    .benefit p {
-      margin: 0;
-      font-size: .92rem;
-      color: var(--muted);
-    }
-
-    /* OFERTA */
-
+    /* Offer */
     .offer {
+      position: relative; overflow: hidden; padding: 82px 0;
       background:
-        radial-gradient(circle at 80% 15%, #294c7d 0, transparent 35%),
-        var(--navy);
-      color: white;
-      padding: 85px 0;
+        radial-gradient(ellipse at 90% 10%, rgba(37,101,165,.42), transparent 30%),
+        linear-gradient(130deg, #071b3b, #102c55);
+      color: #fff;
     }
-
-    .offer h2 { color: white; }
-
-    .offer .lead { color: #d8e4f5; }
-
+    .offer::before {
+      content: ""; position: absolute; width: 350px; height: 350px;
+      left: -200px; bottom: -210px; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%; box-shadow: 0 0 0 30px rgba(255,255,255,.025), 0 0 0 60px rgba(255,255,255,.02);
+    }
+    .offer-layout { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 430px; align-items: center; gap: 55px; }
+    .offer-copy h2 { color: #fff; }
+    .offer-copy p { color: #d4e1f1; font-size: 1.08rem; }
+    .offer-points { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .offer-point { display: flex; align-items: center; gap: 10px; color: #edf4fd; font-size: .92rem; font-weight: 700; }
+    .offer-point span {
+      flex: 0 0 30px; width: 30px; height: 30px; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(255,212,59,.16); color: var(--yellow);
+      font-weight: 950;
+    }
     .offer-card {
-      max-width: 650px;
-      margin: 35px auto 0;
-      background: white;
-      color: var(--navy);
-      padding: 35px;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.25);
-    }
-
-    .price-label {
-      font-weight: 800;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: .8rem;
-    }
-
-    .price {
-      font-size: clamp(3.5rem, 9vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin: 8px 0 18px;
-      letter-spacing: -3px;
-    }
-
-    .price small {
-      font-size: 1.3rem;
-      letter-spacing: 0;
-    }
-
-    .offer-list {
-      list-style: none;
-      padding: 0;
-      margin: 25px 0;
-      text-align: left;
-    }
-
-    .offer-list li {
-      padding: 9px 0 9px 27px;
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .offer-list li::before {
-      content: "✓";
-      color: var(--green);
-      font-weight: 900;
-      position: absolute;
-      left: 0;
-    }
-
-    .offer-card .btn {
-      width: 100%;
-      margin-top: 8px;
-    }
-
-    .secure-note {
-      font-size: .82rem;
-      color: var(--muted);
-      margin-top: 16px;
-    }
-
-    /* FAQ */
-
-    .faq-list {
-      max-width: 820px;
-      margin: 35px auto 0;
-      text-align: left;
-    }
-
-    details {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 12px;
-      padding: 19px 21px;
-      background: white;
-    }
-
-    summary {
-      cursor: pointer;
-      color: var(--navy);
-      font-weight: 800;
-    }
-
-    details p {
-      color: var(--muted);
-      margin: 14px 0 0;
-    }
-
-    /* CIERRE Y FOOTER */
-
-    .final-cta {
-      padding: 65px 0;
+      padding: 31px; background: #fff; color: var(--navy);
+      border-radius: 26px; box-shadow: 0 24px 65px rgba(0,0,0,.28);
       text-align: center;
-      background: #eaf4ff;
     }
-
-    .final-cta h2 { max-width: 760px; margin: 0 auto 18px; }
-
-    footer {
-      background: #0b1428;
-      color: #b9c5d8;
-      text-align: center;
-      padding: 30px 15px;
-      font-size: .82rem;
+    .offer-tag {
+      display: inline-flex; align-items: center; padding: 7px 13px;
+      border-radius: 999px; color: #a22d24; background: #fff0ed;
+      font-size: .74rem; font-weight: 950; letter-spacing: .08em;
     }
+    .old-price { margin: 19px 0 0; color: #7b8799; font-weight: 800; font-size: 1.13rem; }
+    .old-price s { text-decoration-color: #d94841; text-decoration-thickness: 2px; }
+    .new-price {
+      display: flex; align-items: flex-start; justify-content: center; gap: 5px;
+      margin: -2px 0 5px; color: var(--navy);
+      font-size: clamp(3.6rem, 7vw, 5.3rem); font-weight: 1000;
+      letter-spacing: -.075em; line-height: 1.1;
+    }
+    .new-price small { padding-top: 10px; font-size: 1.45rem; letter-spacing: -.02em; }
+    .offer-card > p { color: var(--muted); font-size: .91rem; margin: 8px 0 20px; }
+    .offer-includes { list-style: none; padding: 0; margin: 0 0 23px; text-align: left; }
+    .offer-includes li { padding: 8px 0 8px 27px; border-bottom: 1px solid #edf1f6; position: relative; font-size: .91rem; }
+    .offer-includes li::before { content: "✓"; position: absolute; left: 1px; top: 8px; color: #13845d; font-weight: 950; }
+    .offer-small { font-size: .76rem !important; margin: 16px 0 0 !important; color: #758196 !important; }
+    .trust-row { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 38px; }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 10px; color: #e6eef9; font-size: .82rem; font-weight: 750; }
+    .trust-item svg { flex: 0 0 25px; color: var(--yellow); }
 
-    footer strong { color: white; }
-
-    /* CTA FLOTANTE */
-
+    /* FAQ and Footer */
+    .faq-list { max-width: 850px; margin: 0 auto; }
+    details { padding: 19px 21px; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff; text-align: left; }
+    summary { color: var(--navy); font-weight: 850; cursor: pointer; }
+    details p { color: var(--muted); margin: 12px 0 0; }
+    .last-cta { padding: 55px 0; background: #eaf5ff; text-align: center; }
+    .last-cta h2 { max-width: 800px; margin: 0 auto 16px; }
+    .last-cta p { color: var(--muted); }
+    footer { padding: 30px 0 95px; background: #041127; color: #bac9dc; text-align: center; font-size: .82rem; }
+    footer p { margin: 5px 0; }
+    footer strong { color: #fff; }
     .floating-cta {
-      position: fixed;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(92%, 430px);
-      z-index: 100;
-      display: none;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      position: fixed; z-index: 100; left: 50%; bottom: 14px;
+      transform: translateX(-50%); width: min(560px, calc(100% - 24px));
+      display: none; align-items: center; justify-content: space-between; gap: 9px;
+      padding: 12px 16px; border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px; color: #fff; background: #071b3b;
+      box-shadow: 0 9px 30px rgba(0,0,0,.28); font-size: .88rem; font-weight: 900;
     }
+    .floating-price { white-space: nowrap; color: var(--yellow); }
+    .floating-price s { color: #bdc8d7; font-size: .8em; margin-right: 5px; text-decoration-color: #f06459; }
+    .floating-cta .btn { min-height: 42px; padding: 9px 15px; font-size: .78rem; box-shadow: none; white-space: nowrap; }
 
-    @media (max-width: 800px) {
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr .85fr; gap: 25px; }
+      .hero-visual { min-height: 430px; }
+      .hero-cover { width: 70%; }
+      .pain-wrap { grid-template-columns: 1fr; }
+      .pain-aside { order: 2; }
+      .rubros-grid { grid-template-columns: repeat(3, 1fr); }
+      .offer-layout { grid-template-columns: 1fr 390px; gap: 30px; }
+      .tool-card { grid-template-columns: 115px 1fr; padding: 20px; }
+      .tool-card.app-card { grid-template-columns: 95px 1fr; }
+      .tool-card.app-card img { max-width: 95px; }
+    }
+    @media (max-width: 740px) {
+      .container { width: min(100% - 30px, 560px); }
       .section { padding: 62px 0; }
-
-      .hero { padding: 65px 0; }
-
-      .hero-grid,
-      .app-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      .hero-visual {
-        max-width: 450px;
-        margin: auto;
-        width: 100%;
-      }
-
-      .product-grid,
-      .transformation { grid-template-columns: 1fr; }
-
-      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-
-      .audience-grid { grid-template-columns: repeat(2, 1fr); }
-
-      .hero h1 { font-size: 2.7rem; }
-
-      .floating-cta { display: inline-flex; }
-
-      body { padding-bottom: 75px; }
+      .nav { min-height: 65px; }
+      .brand-mark { transform: scale(.85); transform-origin: left center; width: 31px; }
+      .brand-name { font-size: .92rem; }
+      .nav .btn { min-height: 39px; padding: 9px 14px; font-size: .73rem; }
+      .hero { padding: 55px 0 68px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+      .hero h1 { font-size: clamp(2.45rem, 10vw, 3.6rem); margin: 17px 0; }
+      .hero-copy { font-size: 1rem; }
+      .hero-bullets { grid-template-columns: repeat(3, 1fr); gap: 7px; margin: 22px 0 26px; }
+      .hero-bullet { min-height: 74px; flex-direction: column; justify-content: center; text-align: center; padding: 9px 5px; font-size: .72rem; gap: 5px; }
+      .hero-bullet svg { width: 22px; height: 22px; }
+      .hero-visual { width: min(100%, 470px); min-height: 380px; margin: 0 auto; }
+      .hero-cover { width: 65%; max-height: 390px; }
+      .hero-phone { width: 33%; max-height: 360px; right: 2px; }
+      .hero-stamp { top: 6px; right: 0; font-size: .64rem; }
+      .hero-caption { left: 0; bottom: -8px; font-size: .69rem; }
+      .pain-content .check-list { grid-template-columns: 1fr; }
+      .rubros-panel { padding: 18px; border-radius: 21px; }
+      .rubros-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .rubro-card h3 { min-height: 48px; font-size: .8rem; }
+      .tools-grid { grid-template-columns: 1fr; gap: 18px; }
+      .tools-plus { margin: -12px auto; }
+      .tool-card { min-height: initial; }
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); gap: 11px; }
+      .benefit-card { padding: 17px; }
+      .offer-layout { grid-template-columns: 1fr; gap: 30px; }
+      .offer-points { grid-template-columns: 1fr 1fr; }
+      .offer-card { width: min(100%, 460px); margin-inline: auto; padding: 25px 20px; }
+      .trust-row { grid-template-columns: repeat(2, 1fr); row-gap: 16px; }
+      .trust-item { justify-content: flex-start; font-size: .78rem; }
+      .floating-cta { display: flex; }
+      footer { padding-bottom: 105px; }
     }
-
-    @media (max-width: 480px) {
-      .pain-grid,
-      .benefit-grid,
-      .app-features { grid-template-columns: 1fr; }
-
-      .hero h1 { font-size: 2.35rem; }
-
-      .guide-mockup { min-height: 205px; }
-
-      .offer-card { padding: 25px 20px; }
-
-      .nav .btn { padding: 10px 12px; font-size: .78rem; }
-
-      .brand { font-size: 1rem; }
+    @media (max-width: 390px) {
+      .container { width: calc(100% - 24px); }
+      .hero-bullet { font-size: .66rem; }
+      .hero-visual { min-height: 320px; }
+      .hero-cover { width: 68%; }
+      .hero-phone { width: 34%; }
+      .pain-aside { padding: 23px; }
+      .benefit-grid { grid-template-columns: 1fr; }
+      .offer-points { grid-template-columns: 1fr; }
+      .floating-cta { padding: 9px 10px; }
+      .floating-price { font-size: .78rem; }
+      .floating-cta .btn { padding: 9px 11px; font-size: .7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
   </style>
 </head>
-
 <body>
-
-<header>
-  <div class="container nav">
-    <a href="#" class="brand">PRECIO <span>INTELIGENTE</span></a>
-    <a class="btn btn-small" href="#oferta">VER OFERTA</a>
-  </div>
-</header>
-
-<main>
-
-  <!-- A: ATENCIÓN -->
-
-  <section class="hero">
-    <div class="container hero-grid">
-
-      <div>
-        <span class="eyebrow">Para emprendedores que fabrican y venden</span>
-
-        <h1>
-          ¿VENDÉS, PERO NO SABÉS CUÁNTO <span>GANÁS REALMENTE?</span>
-        </h1>
-
-        <p class="lead">
-          Dejá de poner precios a ojo. Descubrí cuánto te cuesta fabricar
-          cada producto, cuánto gastás para venderlo y cuánto dinero te
-          queda por unidad.
-        </p>
-
-        <a class="btn" href="#oferta">
-          QUIERO CONOCER MIS COSTOS →
-        </a>
-
-        <p class="hero-note">
-          Guía práctica de 24 páginas + aplicación calculadora.
-        </p>
-      </div>
-
-      <div class="hero-visual" style="padding:18px;">
-        <img class="hero-product-image"
-             src="precio_inteligente_assets/portada-precio-inteligente.webp"
-             alt="Portada de la guía Precio Inteligente para emprendedores">
-        <p class="hero-caption">
-          Guía práctica + aplicación calculadora en una sola compra.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- I: INTERÉS / DOLOR -->
-
-  <section class="section section-light">
-    <div class="container center">
-
-      <span class="eyebrow">El problema que no siempre ves</span>
-
-      <h2>Podés estar vendiendo mucho y aun así no saber si tu negocio te deja dinero.</h2>
-
-      <p class="lead">
-        Cada producto tiene costos que van más allá de los materiales.
-        Si no los tenés en cuenta, tus precios pueden estar mal calculados.
-      </p>
-
-      <div class="pain-grid">
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>Calculás los materiales, pero olvidás el tiempo que invertís trabajando.</p>
-        </div>
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>No incluís envases, etiquetas y embalajes.</p>
-        </div>
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>No contemplás los gastos indirectos de producción.</p>
-        </div>
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>Las comisiones y los gastos de venta reducen lo que recibís.</p>
-        </div>
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>Hacés descuentos sin saber cuánto margen te queda.</p>
-        </div>
-
-        <div class="pain-item">
-          <span class="pain-icon">×</span>
-          <p>No podés identificar qué productos dejan más dinero por unidad.</p>
-        </div>
-
-      </div>
-
-      <div class="callout">
-        El problema no siempre es vender poco. A veces, el problema está
-        en no saber cuánto te cuesta vender.
-      </div>
-
-    </div>
-  </section>
-
-  <!-- D: DESEO / TRANSFORMACIÓN -->
-
-  <section class="section">
-    <div class="container center">
-
-      <span class="eyebrow">La transformación</span>
-
-      <h2>Pasá de vender a ciegas a decidir con información.</h2>
-
-      <p class="lead">
-        No se trata solamente de poner un precio. Se trata de entender
-        qué sucede con cada peso que invertís en tu producto.
-      </p>
-
-      <div class="transformation">
-
-        <div class="transform-card before">
-          <h3>ANTES: SIN CLARIDAD</h3>
-          <ul>
-            <li>Calculás los precios de memoria.</li>
-            <li>No conocés todos tus costos.</li>
-            <li>Tu tiempo de trabajo queda fuera de las cuentas.</li>
-            <li>No sabés cuánto dinero te queda por unidad.</li>
-            <li>Tomás decisiones sin información completa.</li>
-          </ul>
-        </div>
-
-        <div class="transform-card after">
-          <h3>DESPUÉS: CON INFORMACIÓN</h3>
-          <ul>
-            <li>Identificás el costo de cada producto.</li>
-            <li>Organizás tus gastos por categoría.</li>
-            <li>Incluís tu tiempo de producción.</li>
-            <li>Estimás cuánto queda después de los costos.</li>
-            <li>Comparás productos y evaluás tus precios.</li>
-          </ul>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PRODUCTO -->
-
-  <section class="section section-light">
-    <div class="container center">
-
-      <span class="eyebrow">Tu solución práctica</span>
-
-      <h2>Dos herramientas. Un objetivo: conocer mejor los números de tu negocio.</h2>
-
-      <p class="lead">
-        La guía te enseña qué información reunir. La aplicación te ayuda
-        a organizarla y realizar los cálculos.
-      </p>
-
-      <div class="product-grid">
-
-        <article class="product-card">
-          <div class="product-number">01</div>
-<img class="product-image" src="precio_inteligente_assets/portada-precio-inteligente.webp" alt="Portada de la guía Precio Inteligente">
-<h3>Guía PRECIO INTELIGENTE</h3>
-          <p>
-            Una guía educativa de 24 páginas para aprender a identificar
-            los costos que intervienen en la fabricación y venta de tus productos.
-          </p>
-
-          <ul class="feature-list">
-            <li>Identificación de materiales.</li>
-            <li>Cálculo de mano de obra.</li>
-            <li>Envases y embalajes.</li>
-            <li>Gastos indirectos de producción.</li>
-            <li>Gastos asociados a la venta.</li>
-            <li>Interpretación de los resultados.</li>
-          </ul>
-        </article>
-
-        <article class="product-card">
-          <div class="product-number">02</div>
-<img class="product-image" src="precio_inteligente_assets/captura-app-precio-inteligente.webp" alt="Pantalla real de la aplicación Calculadora Precio Inteligente">
-<h3>Calculadora PRECIO INTELIGENTE</h3>
-          <p>
-            Una aplicación que te permite cargar los datos de tus productos
-            y obtener una estimación organizada de sus costos y resultados.
-          </p>
-
-          <ul class="feature-list">
-            <li>Cálculo de costos por unidad.</li>
-            <li>Registro de gastos por categoría.</li>
-            <li>Estimación del dinero restante.</li>
-            <li>Precio orientativo según el margen ingresado.</li>
-            <li>Guardar y comparar hasta 10 productos.</li>
-            <li>Funcionamiento sin conexión después de instalarla.</li>
-          </ul>
-        </article>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- APP / DEMOSTRACIÓN -->
-
-  <section class="section app-section">
-    <div class="container app-grid">
-
-      <div>
-        <span class="eyebrow">Tu negocio en números</span>
-
-        <h2>Conocé cuánto te cuesta producir y cuánto te queda por unidad.</h2>
-
-        <p class="lead">
-          Cargá los costos de tus productos y utilizá los resultados
-          para evaluar tus precios con mayor criterio.
-        </p>
-
-        <div class="app-features">
-          <div class="app-feature">Materiales</div>
-          <div class="app-feature">Mano de obra</div>
-          <div class="app-feature">Envases y embalajes</div>
-          <div class="app-feature">Gastos indirectos</div>
-          <div class="app-feature">Gastos de venta</div>
-          <div class="app-feature">Comparación de productos</div>
-        </div>
-
-      </div>
-
-      <div>
-        <img class="app-screenshot"
-             src="precio_inteligente_assets/captura-app-precio-inteligente.webp"
-             alt="Captura real de la pantalla principal de la aplicación Precio Inteligente">
-        <p class="visual-caption">
-          Así se ve la pantalla principal de la aplicación.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PARA QUIÉN -->
-
-  <section class="section">
-    <div class="container center">
-
-      <span class="eyebrow">Hecho para emprendedores</span>
-
-      <h2>Si transformás materiales en productos para vender, esto es para vos.</h2>
-
-      <p class="lead">
-        PRECIO INTELIGENTE puede ayudarte a organizar los costos de
-        distintos tipos de emprendimientos.
-      </p>
-
-      <div class="audience-grid">
-        <div class="audience-item"><span>🕯</span>Velas y aromatizantes</div>
-        <div class="audience-item"><span>🧼</span>Jabones y cosmética</div>
-        <div class="audience-item"><span>🧵</span>Ropa y textiles</div>
-        <div class="audience-item"><span>🍰</span>Pastelería y alimentos</div>
-        <div class="audience-item"><span>💍</span>Bijouterie y accesorios</div>
-        <div class="audience-item"><span>🎨</span>Resina y artesanías</div>
-        <div class="audience-item"><span>🪑</span>Carpintería y muebles</div>
-        <div class="audience-item"><span>🎁</span>Productos personalizados</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- BENEFICIOS -->
-
-  <section class="section section-light">
-    <div class="container center">
-
-      <span class="eyebrow">Lo que vas a poder hacer</span>
-
-      <h2>Empezá a mirar tu negocio desde otra perspectiva.</h2>
-
-      <div class="benefit-grid">
-
-        <div class="benefit">
-          <h3>Conocer tus costos</h3>
-          <p>Identificá los gastos que intervienen en cada producto.</p>
-        </div>
-
-        <div class="benefit">
-          <h3>Valorar tu trabajo</h3>
-          <p>Incorporá el tiempo que dedicás a producir.</p>
-        </div>
-
-        <div class="benefit">
-          <h3>Revisar tus precios</h3>
-          <p>Evaluá si tus precios cubren los costos que ingresaste.</p>
-        </div>
-
-        <div class="benefit">
-          <h3>Comparar productos</h3>
-          <p>Analizá hasta 10 productos guardados.</p>
-        </div>
-
-        <div class="benefit">
-          <h3>Organizar tus números</h3>
-          <p>Tené la información de tus productos en un solo lugar.</p>
-        </div>
-
-        <div class="benefit">
-          <h3>Tomar decisiones</h3>
-          <p>Utilizá tus resultados para evaluar cambios en tu negocio.</p>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- A: ACCIÓN / OFERTA -->
-
-  <section class="offer" id="oferta">
-    <div class="container center">
-
-      <span class="eyebrow">Accedé a las dos herramientas</span>
-
-      <h2>Tu negocio necesita más que ventas. Necesita claridad sobre sus costos.</h2>
-
-      <p class="lead">
-        Empezá a calcular, organizar y evaluar tus precios con PRECIO INTELIGENTE.
-      </p>
-
-      <div class="offer-card">
-
-        <p class="price-label">Acceso por</p>
-
-        <div class="price">USD 9<small>,90</small></div>
-
-        <p>Una compra. Dos herramientas para empezar a ordenar tus números.</p>
-
-        <ul class="offer-list">
-          <li>Guía educativa de 24 páginas en PDF.</li>
-          <li>Aplicación Calculadora Precio Inteligente.</li>
-          <li>Registro de costos por categoría.</li>
-          <li>Estimación del dinero restante por unidad.</li>
-          <li>Precio orientativo según el margen ingresado.</li>
-          <li>Comparación de hasta 10 productos.</li>
-          <li>Uso sin conexión después de instalar la aplicación.</li>
-          <li>Función de copia y recuperación de datos.</li>
-        </ul>
-
-        <a class="btn" href="https://pay.hotmart.com/R108349397Y">
-          QUIERO MI PRECIO INTELIGENTE →
-        </a>
-
-        <p class="secure-note">
-          Continuarás al checkout de Hotmart para completar tu compra.
-        </p>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FAQ -->
-
-  <section class="section section-light">
-    <div class="container center">
-
-      <span class="eyebrow">Preguntas frecuentes</span>
-
-      <h2>Antes de empezar, resolvé tus dudas.</h2>
-
-      <div class="faq-list">
-
-        <details>
-          <summary>¿Necesito conocimientos de contabilidad?</summary>
-          <p>
-            No. La guía explica cómo organizar los datos necesarios y la
-            aplicación realiza los cálculos a partir de la información ingresada.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿La aplicación funciona sin internet?</summary>
-          <p>
-            Sí. Después de instalarla, podés utilizarla sin conexión.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿Puedo calcular diferentes productos?</summary>
-          <p>
-            Sí. Podés guardar y comparar hasta 10 productos.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿Dónde se guardan mis datos?</summary>
-          <p>
-            Los datos quedan guardados en tu teléfono. También podés crear
-            una copia de seguridad y recuperarla al cambiar de dispositivo.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿La aplicación decide cuánto tengo que cobrar?</summary>
-          <p>
-            No. Ofrece un precio orientativo según los costos y el margen
-            que ingresás. La decisión final también debe considerar el
-            mercado, tus clientes, la demanda y el valor de tu producto.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿Me garantiza que voy a ganar dinero?</summary>
-          <p>
-            No. Es una herramienta de organización y cálculo. Los resultados
-            dependen de la exactitud de los datos ingresados y de las
-            condiciones reales de tu negocio.
-          </p>
-        </details>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CIERRE -->
-
-  <section class="final-cta">
-    <div class="container">
-
-      <h2>Dejá de poner precios a ojo. Empezá a conocer tus números.</h2>
-
-      <p class="lead">
-        Calculá con claridad. Vendé con estrategia. Crecé con rentabilidad.
-      </p>
-
-      <a class="btn btn-blue" href="https://pay.hotmart.com/R108349397Y">
-        ACCEDER AHORA POR USD 9,90 →
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Precio Inteligente, inicio">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">PRECIO <span>INTELIGENTE</span></span>
       </a>
-
-      <p style="margin-top:22px;font-weight:800;color:#65738a;">
-        SILVI AURA | PRECIO INTELIGENTE
-      </p>
-
+      <a class="btn" href="#oferta">VER OFERTA <span class="btn-arrow">›</span></a>
     </div>
-  </section>
+  </header>
 
-</main>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Guía práctica + app calculadora para emprendedores</span>
+          <h1>¿Vendés, producís y trabajás… pero no sabés cuánto <span class="highlight">ganás realmente?</span></h1>
+          <p class="hero-copy">Dejá de poner precios a ojo. Descubrí cuánto te cuesta fabricar cada producto, cuánto gastás para venderlo y cuánto dinero te queda por unidad.</p>
 
-<footer>
-  <p><strong>PRECIO INTELIGENTE</strong> · SILVI AURA</p>
-  <p>
-    Material educativo. No constituye asesoramiento contable,
-    financiero, tributario ni legal.
-  </p>
-  <p>
-    Los resultados de la aplicación son estimaciones basadas en
-    los datos ingresados por cada usuario.
-  </p>
-  <p>© <span id="year"></span> Silvi Aura. Todos los derechos reservados.</p>
-</footer>
+          <div class="hero-bullets">
+            <div class="hero-bullet">
+              <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2"/></svg>
+              <span>Calculá tus costos</span>
+            </div>
+            <div class="hero-bullet">
+              <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 20h18M5 17V9h4v8m3 0V4h4v13m3 0v-6h2v6"/></svg>
+              <span>Evaluá tus precios</span>
+            </div>
+            <div class="hero-bullet">
+              <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m14.5 9.5 6-6"/></svg>
+              <span>Decidí con información</span>
+            </div>
+          </div>
+          <a class="btn" href="#oferta">QUIERO MI PRECIO INTELIGENTE <span class="btn-arrow">»</span></a>
+          <p class="hero-note">Incluye una guía educativa de 24 páginas y una aplicación calculadora.</p>
+        </div>
 
-<a class="btn floating-cta" href="https://pay.hotmart.com/R108349397Y">
-  ACCEDER POR USD 9,90 →
-</a>
+        <div class="hero-visual" aria-label="Vista de la guía y la aplicación Precio Inteligente">
+          <img class="hero-cover" src="precio_inteligente_assets/portada-precio-inteligente.webp" alt="Portada de la guía Precio Inteligente">
+          <img class="hero-phone" src="precio_inteligente_assets/captura-app-precio-inteligente.webp" alt="Captura real de la aplicación Calculadora Precio Inteligente">
+          <div class="hero-stamp">GUÍA +<br>APP CALCULADORA</div>
+          <div class="hero-caption">Dos herramientas que trabajan juntas</div>
+        </div>
+      </div>
+    </section>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    <section class="section section-soft">
+      <div class="container pain-wrap">
+        <aside class="pain-aside">
+          <p class="eyebrow">El problema no siempre es vender poco</p>
+          <p class="big-quote">A veces, el problema es <span>no saber cuánto te cuesta vender.</span></p>
+          <p>Cuando algunos costos quedan afuera de tus cuentas, el precio puede no reflejar todo el trabajo y los gastos que hay detrás de cada producto.</p>
+        </aside>
+        <div class="pain-content">
+          <span class="eyebrow">¿Te suena familiar?</span>
+          <h2>Hay costos que suelen quedar fuera de la cuenta.</h2>
+          <ul class="check-list">
+            <li>Calculás los materiales, pero olvidás tu tiempo de trabajo.</li>
+            <li>No incluís envases, etiquetas y embalajes.</li>
+            <li>No contemplás los gastos indirectos de producción.</li>
+            <li>Las comisiones y gastos de venta reducen lo que recibís.</li>
+            <li>Hacés descuentos sin saber cuánto margen te queda.</li>
+            <li>Vendés, pero no tenés claridad sobre cuánto queda por unidad.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Para distintos tipos de emprendimientos</span>
+          <h2>Si transformás materiales en productos para vender, esta herramienta puede ayudarte.</h2>
+          <p>Organizá los costos de tu producción, sea cual sea el rubro de tu emprendimiento.</p>
+        </div>
+        <div class="rubros-panel">
+          <div class="rubros-grid">
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-pasteleria.webp" alt="Productos de pastelería artesanal">
+              <h3>Pastelería y alimentos</h3>
+            </article>
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-textiles.webp" alt="Prendas y textiles confeccionados">
+              <h3>Ropa y textiles</h3>
+            </article>
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-velas.webp" alt="Velas artesanales y aromatizantes">
+              <h3>Velas y aromatizantes</h3>
+            </article>
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-cosmetica.webp" alt="Jabones y productos cosméticos artesanales">
+              <h3>Jabones y cosmética</h3>
+            </article>
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-bijouterie.webp" alt="Bijouterie y accesorios">
+              <h3>Bijouterie y accesorios</h3>
+            </article>
+            <article class="rubro-card">
+              <img src="precio_inteligente_assets/rubro-carpinteria.webp" alt="Objetos y productos de carpintería">
+              <h3>Carpintería y muebles</h3>
+            </article>
+          </div>
+          <p class="rubros-note">También puede aplicarse a resina, artesanías, sublimación, papelería y productos personalizados.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Dos herramientas que trabajan juntas</span>
+          <h2>Una guía para entender. Una app para calcular.</h2>
+          <p>Tenés una explicación práctica y una herramienta para organizar los datos de tus productos.</p>
+        </div>
+
+        <div class="tools-grid">
+          <article class="tool-card">
+            <img src="precio_inteligente_assets/portada-precio-inteligente.webp" alt="Portada de la guía práctica Precio Inteligente">
+            <div>
+              <h3>Guía práctica</h3>
+              <p class="tool-subtitle">24 páginas en PDF</p>
+              <ul class="check-list">
+                <li>Identificá los costos de cada producto.</li>
+                <li>Organizá materiales y mano de obra.</li>
+                <li>Reconocé gastos de producción y venta.</li>
+                <li>Aprendé a interpretar los resultados.</li>
+              </ul>
+            </div>
+          </article>
+          <div class="tools-plus" aria-hidden="true">+</div>
+          <article class="tool-card app-card">
+            <img src="precio_inteligente_assets/captura-app-precio-inteligente.webp" alt="Pantalla principal de la app Calculadora Precio Inteligente">
+            <div>
+              <h3>App calculadora</h3>
+              <p class="tool-subtitle">En tu celular</p>
+              <ul class="check-list">
+                <li>Cargá los datos de tus productos.</li>
+                <li>Calculá costos y gastos.</li>
+                <li>Conocé cuánto te queda por unidad.</li>
+                <li>Obtené un precio orientativo.</li>
+                <li>Guardá y compará hasta 10 productos.</li>
+                <li>Usala sin internet después de instalarla.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <p class="tools-bottom">La aplicación calcula estimaciones a partir de los datos que ingresás. La guía te ayuda a comprender qué información necesitás y cómo analizarla.</p>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">De la intuición a la información</span>
+          <h2>Empezá a tomar decisiones con tus números sobre la mesa.</h2>
+          <p>No se trata de cobrar cualquier precio. Se trata de conocer mejor los costos antes de decidir cuánto cobrar.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card"><div class="benefit-number">01</div><h3>Conocé tus costos</h3><p>Identificá los gastos que intervienen en la elaboración de cada producto.</p></article>
+          <article class="benefit-card"><div class="benefit-number">02</div><h3>Valorá tu trabajo</h3><p>Incluí el tiempo y la mano de obra que destinás a producir.</p></article>
+          <article class="benefit-card"><div class="benefit-number">03</div><h3>Revisá tus precios</h3><p>Evaluá si el precio contempla los costos que cargaste.</p></article>
+          <article class="benefit-card"><div class="benefit-number">04</div><h3>Compará productos</h3><p>Guardá y compará hasta 10 productos para revisar sus resultados.</p></article>
+          <article class="benefit-card"><div class="benefit-number">05</div><h3>Ordená tus números</h3><p>Tené la información de tus productos organizada en un mismo lugar.</p></article>
+          <article class="benefit-card"><div class="benefit-number">06</div><h3>Decidí con criterio</h3><p>Usá los resultados como apoyo para evaluar cambios en tu emprendimiento.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer" id="oferta">
+      <div class="container">
+        <div class="offer-layout">
+          <div class="offer-copy">
+            <span class="eyebrow">Accedé a las dos herramientas</span>
+            <h2>Tu emprendimiento necesita más que ventas. Necesita claridad sobre sus costos.</h2>
+            <p>Empezá a calcular, organizar y evaluar tus precios con PRECIO INTELIGENTE.</p>
+            <div class="offer-points">
+              <div class="offer-point"><span>✓</span>Guía práctica de 24 páginas</div>
+              <div class="offer-point"><span>✓</span>App calculadora para celular</div>
+              <div class="offer-point"><span>✓</span>Hasta 10 productos guardados</div>
+              <div class="offer-point"><span>✓</span>Uso sin conexión, tras instalar</div>
+            </div>
+          </div>
+
+          <div class="offer-card">
+            <span class="offer-tag">PRECIO PROMOCIONAL</span>
+            <p class="old-price">Precio anterior: <s>USD 21,99</s></p>
+            <div class="new-price"><span>9</span><small>,99 USD</small></div>
+            <p>Una compra. Dos herramientas para empezar a ordenar tus números.</p>
+            <ul class="offer-includes">
+              <li>Guía educativa descargable en PDF.</li>
+              <li>Aplicación Calculadora Precio Inteligente.</li>
+              <li>Registro de costos por categoría.</li>
+              <li>Estimación del dinero restante por unidad.</li>
+              <li>Precio orientativo según el margen ingresado.</li>
+              <li>Función para guardar, comparar y respaldar tus datos.</li>
+            </ul>
+            <a class="btn btn-wide" href="https://pay.hotmart.com/R108349397Y" target="_blank" rel="noopener noreferrer">QUIERO MI PRECIO INTELIGENTE <span class="btn-arrow">»</span></a>
+            <p class="offer-small">El pago se completa en el checkout seguro de Hotmart. Revisá allí los medios y la moneda disponibles para tu país.</p>
+          </div>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Pago a través de Hotmart</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m13 2-3 9h7l-6 11 2-9H6l7-11Z"/></svg>
+            <span>Acceso después de la compra</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></svg>
+            <span>Respaldo de tus datos</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+            <span>Uso desde tu celular</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2>Antes de empezar, resolvé tus dudas.</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>¿Necesito conocimientos de contabilidad?</summary>
+            <p>No. La guía explica cómo organizar los datos necesarios y la aplicación realiza los cálculos a partir de la información que ingresás.</p>
+          </details>
+          <details>
+            <summary>¿La aplicación funciona sin internet?</summary>
+            <p>Sí. Después de instalarla, podés utilizarla sin conexión.</p>
+          </details>
+          <details>
+            <summary>¿Puedo calcular diferentes productos?</summary>
+            <p>Sí. Podés guardar y comparar hasta 10 productos.</p>
+          </details>
+          <details>
+            <summary>¿Dónde se guardan mis datos?</summary>
+            <p>Los datos quedan guardados en tu teléfono. También podés crear una copia de seguridad y recuperarla al cambiar de dispositivo.</p>
+          </details>
+          <details>
+            <summary>¿La aplicación decide cuánto tengo que cobrar?</summary>
+            <p>No. Ofrece un precio orientativo según los costos y el margen que ingresás. La decisión final también debe considerar el mercado, tus clientes, la demanda y el valor de tu producto.</p>
+          </details>
+          <details>
+            <summary>¿Me garantiza que voy a ganar dinero?</summary>
+            <p>No. Es una herramienta de organización y cálculo. Los resultados dependen de la exactitud de los datos ingresados y de las condiciones reales de tu negocio.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="last-cta">
+      <div class="container">
+        <h2>Dejá de poner precios a ojo. Empezá a conocer tus números.</h2>
+        <p>Calculá con claridad. Vendé con estrategia. Decidí con información.</p>
+        <a class="btn" href="https://pay.hotmart.com/R108349397Y" target="_blank" rel="noopener noreferrer">ACCEDER POR USD 9,99 <span class="btn-arrow">»</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>PRECIO INTELIGENTE</strong> · SILVI AURA</p>
+      <p>Material educativo. No constituye asesoramiento contable, financiero, tributario ni legal.</p>
+      <p>Los resultados de la aplicación son estimaciones basadas en los datos ingresados por cada usuario.</p>
+      <p>© <span id="year"></span> Silvi Aura. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <a class="floating-cta" href="https://pay.hotmart.com/R108349397Y" target="_blank" rel="noopener noreferrer" aria-label="Comprar Precio Inteligente por 9 dólares con 99 centavos">
+    <span class="floating-price"><s>USD 21,99</s> USD 9,99</span>
+    <span class="btn">COMPRAR AHORA »</span>
+  </a>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
