@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,9 @@
   <title>Precio Inteligente | Dejá de vender a ojo</title>
   <meta name="description" content="Conocé cuánto te cuesta fabricar tus productos, cuánto gastás para venderlos y cuánto dinero te queda. Guía práctica y calculadora para emprendedores.">
   <meta name="theme-color" content="#101d38">
+  <meta property="og:title" content="Precio Inteligente | Dejá de vender a ojo">
+  <meta property="og:description" content="Guía práctica de 24 páginas + aplicación calculadora para emprendedores.">
+  <meta property="og:image" content="precio_inteligente_assets/portada-precio-inteligente.webp">
 
   <style>
     :root {
@@ -127,6 +130,49 @@
       padding: 12px 19px;
       font-size: .9rem;
     }
+
+
+    .hero-product-image {
+      display: block;
+      width: min(100%, 390px);
+      max-height: 560px;
+      object-fit: contain;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 22px 55px rgba(0,0,0,.28);
+      background: #fff;
+    }
+
+    .product-image {
+      display: block;
+      width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin: 0 auto 22px;
+      background: #f8faff;
+    }
+
+    .app-screenshot {
+      display: block;
+      width: min(100%, 390px);
+      max-height: 760px;
+      object-fit: contain;
+      object-position: top center;
+      margin: 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 20px 45px rgba(0,0,0,.22);
+      background: #fff;
+    }
+
+    .visual-caption {
+      color: var(--muted);
+      font-size: .82rem;
+      text-align: center;
+      margin: 10px 0 0;
+    }
+
+    .app-section .visual-caption { color: #d0dced; }
 
     /* NAVEGACIÓN */
 
@@ -768,29 +814,12 @@
         </p>
       </div>
 
-      <div class="hero-visual">
-        <div class="guide-mockup">
-          <div class="mini-label">GUÍA PRÁCTICA PARA EMPRENDEDORES</div>
-          <strong>PRECIO<br>INTELIGENTE</strong>
-          <div class="stripe"></div>
-          <p style="font-size:.8rem;margin-top:17px;">
-            Dejá de vender a ojo. Empezá a conocer tus números.
-          </p>
-        </div>
-
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="phone-title">CALCULADORA PRECIO INTELIGENTE</div>
-            <div class="phone-field">Materiales: ingresar costo</div>
-            <div class="phone-field">Mano de obra: ingresar tiempo</div>
-            <div class="phone-field">Envases y embalajes</div>
-            <div class="phone-field">Gastos de venta</div>
-            <div class="phone-result">RESULTADO: dinero restante por unidad</div>
-          </div>
-        </div>
-
+      <div class="hero-visual" style="padding:18px;">
+        <img class="hero-product-image"
+             src="precio_inteligente_assets/portada-precio-inteligente.webp"
+             alt="Portada de la guía Precio Inteligente para emprendedores">
         <p class="hero-caption">
-          Dos herramientas para organizar los números de tu negocio.
+          Guía práctica + aplicación calculadora en una sola compra.
         </p>
       </div>
 
@@ -914,7 +943,8 @@
 
         <article class="product-card">
           <div class="product-number">01</div>
-          <h3>Guía PRECIO INTELIGENTE</h3>
+<img class="product-image" src="precio_inteligente_assets/portada-precio-inteligente.webp" alt="Portada de la guía Precio Inteligente">
+<h3>Guía PRECIO INTELIGENTE</h3>
           <p>
             Una guía educativa de 24 páginas para aprender a identificar
             los costos que intervienen en la fabricación y venta de tus productos.
@@ -932,7 +962,8 @@
 
         <article class="product-card">
           <div class="product-number">02</div>
-          <h3>Calculadora PRECIO INTELIGENTE</h3>
+<img class="product-image" src="precio_inteligente_assets/captura-app-precio-inteligente.webp" alt="Pantalla real de la aplicación Calculadora Precio Inteligente">
+<h3>Calculadora PRECIO INTELIGENTE</h3>
           <p>
             Una aplicación que te permite cargar los datos de tus productos
             y obtener una estimación organizada de sus costos y resultados.
@@ -979,41 +1010,12 @@
 
       </div>
 
-      <div class="app-demo">
-        <h3>¿Qué información podés organizar?</h3>
-
-        <div class="demo-line">
-          <span>Materiales</span>
-          <strong>Tu costo ingresado</strong>
-        </div>
-
-        <div class="demo-line">
-          <span>Mano de obra</span>
-          <strong>Tu costo ingresado</strong>
-        </div>
-
-        <div class="demo-line">
-          <span>Envases y embalajes</span>
-          <strong>Tu costo ingresado</strong>
-        </div>
-
-        <div class="demo-line">
-          <span>Gastos indirectos</span>
-          <strong>Tu costo ingresado</strong>
-        </div>
-
-        <div class="demo-line">
-          <span>Gastos de venta</span>
-          <strong>Tu costo ingresado</strong>
-        </div>
-
-        <div class="demo-total">
-          RESULTADO: COSTOS Y DINERO RESTANTE POR UNIDAD
-        </div>
-
-        <p class="disclaimer">
-          Vista ilustrativa. Los resultados reales dependen de los datos
-          que cargues en la aplicación.
+      <div>
+        <img class="app-screenshot"
+             src="precio_inteligente_assets/captura-app-precio-inteligente.webp"
+             alt="Captura real de la pantalla principal de la aplicación Precio Inteligente">
+        <p class="visual-caption">
+          Así se ve la pantalla principal de la aplicación.
         </p>
       </div>
 
